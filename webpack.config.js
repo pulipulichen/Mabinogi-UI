@@ -19,7 +19,7 @@ module.exports = {
 				loader: ExtractTextPlugin.extract('css!postcss!sass')
 			},
 			{
-				test: /(\.png|\.cur|\.wav)$/,
+				test: /(\.png|\.cur|\.wav|\.jpg)$/,
 				loader: 'file'
 			}
 		]
@@ -30,7 +30,13 @@ module.exports = {
 	postcss: function(){
 		return [PostcssSprites({
 			stylesheetPath: './src/style',
-			spritePath: './src/gen'
+			spritePath: './src/gen',
+			filterBy: function(image){
+				if(image.url.match(/material/)){
+					return Promise.reject()
+				}
+				return Promise.resolve()
+			}
 		})]
 	}
 }

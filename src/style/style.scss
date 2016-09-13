@@ -17,7 +17,7 @@ $prohibitCursor: url(../cursor/prohibit.cur) 0 0, default;
 
 div.dialogue {
 	position: absolute;
-	top: 60%;
+	top: 70%;
 	left: 50%;
 	margin-left: -472px;
 }
@@ -34,11 +34,15 @@ html { height: 100%; }
 
 body {
 	font-family: Simsun;
-	background: #000;
 	height: 100%;
 	margin: 0;
 	cursor: $defaultCursor;
 	@include noneSelect;
+	//background: url(../image/material/bg.jpg) #000;
+	//background-size: initial;
+	//background-position: center;
+	//background-repeat: no-repeat;
+	background: #000;
 }
 
 div.dialogue {
@@ -55,7 +59,7 @@ div.dialogue {
 
 	cursor: $prohibitCursor;
 
-	&.continue {
+	&.to-continue {
 		cursor: $nextPageCursor;
 	}
 
@@ -71,10 +75,14 @@ div.dialogue {
 	}
 
 	.content {
-		line-height: 1px;
 		position: absolute;
 		left: 32px;
 		top: 31px;
+
+		&.only-content {
+			top: 12px;
+			left: 32px;
+		}
 	}
 
 	.button-layer {
@@ -106,6 +114,13 @@ div.dialogue {
 	button:active {
 		background: url(../image/button-active.png);
 	}
+
+	.avatar {
+		position: absolute;
+		bottom: 120px;
+		left: -60px;
+		z-index: -1;
+	}
 }
 
 div.diary {
@@ -132,5 +147,5 @@ div.screen {
 	width: 1280px;
 	margin: 0 auto;
 	height: 100%;
-	background: #fff;
+	//background: #fff;
 }
