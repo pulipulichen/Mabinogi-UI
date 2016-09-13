@@ -1,0 +1,136 @@
+$defaultCursor: url(../cursor/default.cur) 0 0, default;
+$pointerCursor: url(../cursor/pointer.cur) 0 0, pointer;
+$leftPageCursor: url(../cursor/left_page.cur) 0 0, default;
+$rightPageCursor: url(../cursor/right_page.cur) 0 0, default;
+$nextPageCursor: url(../cursor/next_page.cur) 0 0, default;
+$dragCursor: url(../cursor/drag.cur) 0 0, default;
+$prohibitCursor: url(../cursor/prohibit.cur) 0 0, default;
+
+@mixin noneSelect {
+	user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+div.dialogue {
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	margin-left: -472px;
+}
+
+div.diary {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -128px;
+	margin-left: 48px;
+}
+
+html { height: 100%; }
+
+body {
+	font-family: Simsun;
+	background: #000;
+	height: 100%;
+	margin: 0;
+	cursor: $defaultCursor;
+	@include noneSelect;
+}
+
+div.dialogue {
+	border-width: 16px;
+	border-style: solid;
+	border-image: url(../image/dialog.png) 16 round;
+	background: #60473f;
+	width: 944px;
+	height: 188px;
+	color: #fff;
+	font-size: 12px;
+	box-sizing: border-box;
+	position: relative;
+
+	cursor: $prohibitCursor;
+
+	&.continue {
+		cursor: $nextPageCursor;
+	}
+
+	.name {
+		text-shadow: 1px 1px 2px #000,
+					-1px -1px 2px #000,
+					1px -1px 2px #000,
+					-1px 1px 2px #000;
+		position: absolute;
+		left: 32px;
+		top: 12px;
+		font-size: 12px;
+	}
+
+	.content {
+		line-height: 1px;
+		position: absolute;
+		left: 32px;
+		top: 31px;
+	}
+
+	.button-layer {
+		position: absolute;
+		bottom: 3px;
+		left: 28px;
+	}
+
+	button {
+		border: none;
+		background: url(../image/button.png);
+
+		color: #fff;
+		font-size: 12px;
+		width: 88px;
+		height: 22px;
+		text-align: center;
+		padding: 0;
+		outline: none;
+
+		float: left;
+		cursor: $pointerCursor;
+	}
+
+	button:hover {
+		background: url(../image/button-hover.png);
+	}
+
+	button:active {
+		background: url(../image/button-active.png);
+	}
+}
+
+div.diary {
+	background: url(../image/diary.png);
+	width: 512px;
+	height: 256px;
+	color: #fff;
+	font-size: 12px;
+
+	.label-1, .label-2, .label-3, .label-4 {
+		position: absolute;
+		left: 331px;
+		width: 40px;
+		cursor: $pointerCursor;
+	}
+
+	.label-1 { top: 24px; }
+	.label-2 { top: 57px; }
+	.label-3 { top: 90px; }
+	.label-4 { top: 206px; }
+}
+
+div.screen {
+	width: 1280px;
+	margin: 0 auto;
+	height: 100%;
+	background: #fff;
+}
