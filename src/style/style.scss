@@ -28,6 +28,60 @@ div.diary {
 	top: 50%;
 	margin-top: -128px;
 	margin-left: 48px;
+
+	.keyword {
+		border: 1px solid black;
+		border-radius: 2px;
+		padding: 1px;
+		color: blue;
+		font-size: 11.5px;
+		letter-spacing: 0.75px;
+		&:hover {
+			box-shadow: 0 0 0px 1px #000;
+			cursor: $pointerCursor;
+		}
+		&:active {
+			background: black;
+			color: yellow;
+		}
+	}
+
+	.title {
+		display: inline-block;
+		text-align: center;
+		width: 100%;
+	}
+
+	.left-side, .right-side {
+		top: 9px;
+		position: absolute;
+		width: 140px;
+		height: 220px;
+		color: black;
+		line-height: 16px;
+		font-size: 11.5px;
+		letter-spacing: 0.75px;
+	}
+
+	.left-side {
+		cursor: $leftPageCursor;
+		left: 20px;
+	}
+
+	.right-side {
+		cursor: $rightPageCursor;
+		left: 185px;
+	}
+
+	.page-number {
+		color: black;
+		position: absolute;
+		right: 192px;
+		bottom: 20px;
+		font-family: monospace;
+		font-size: 11.5px;
+		letter-spacing: 0.75px;
+	}
 }
 
 html { height: 100%; }
