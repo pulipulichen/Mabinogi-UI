@@ -1,52 +1,59 @@
-var urls = [require('../sound/gen_button_down.wav'),
-			require('../sound/gen_button_confirm.wav')]
-//			require('../sound/gen_hover.wav')]
-
-var avatar = require('../image/material/marlowe-avatar.png')
+import Media from './media'
+import Diary from './diary'
 
 class Dialogue {
-	static init(){
-		var [down, confirm, hover] = urls.map(f => {
-			var audio = document.createElement('audio')
-			audio.src = f
-			audio.preload = 'auto'
-			return audio
-		})
-		this.dom = document.querySelector('div.dialogue')
-		this.diaryDom = document.querySelector('div.diary')
+	constructor(div){
+		this.sounds = Media.sounds
+		div.innerHTML = (`
+			<div class="dialogue" style="display:none">
+				<img class="avatar">
+				<div class="name"></div>
+				<div class="content only-content"></div>
+				<div class="button-layer"></div>
+			</div>
+		`)
+		this.dom = div.querySelector('.dialogue')
 		this.contentDom = this.dom.querySelector('.content')
 		this.nameDom = this.dom.querySelector('.name')
 		this.avatarDom = this.dom.querySelector('.avatar')
 		this.buttonLayerDom = this.dom.querySelector('.button-layer')
 
-		this.dom.addEventListener('mousedown', e => e.target.tagName == 'BUTTON' ? down.play() : null)
-		this.dom.addEventListener('mouseup', e => e.target.tagName == 'BUTTON' ? confirm.play() : null)
-		//this.dom.addEventListener('mouseover', e => e.target.tagName == 'BUTTON' ? hover.play() : null)
+		this.dom.addEventListener('mousedown', e => e.target.tagName == 'BUTTON' ? this.sounds.buttonDown.play() : null)
+		this.dom.addEventListener('mouseup', e => e.target.tagName == 'BUTTON' ? this.sounds.buttonConfirm.play() : null)
+		this.dom.addEventListener('mouseover', e => e.target.tagName == 'BUTTON' ? this.sounds.buttonHover.play() : null)
+		//this.dom.addEventListener('mouseout', e => e.target.tagName == 'BUTTON' ? this.sounds.buttonCancel.play() : null)
+
 		this.data = []
 		this.dom.addEventListener('click', e => {
 			if(this.toContinue){
-				this.buttons[0].callback()
+				this.buttons[0].callback(e)
 			}
 		})
 	}
 
-	static show(){
+	show(){
 		this.dom.style.display = 'block'
+		this.sounds.windowOpen.play()
 	}
 
-	static hide(){
+	hide(){
 		this.dom.style.display = 'none'
+		this.sounds.windowClose.play()
 	}
 
-	static showDiary(){
-		this.diaryDom.style.display = 'block'
+	showDiary(){
+		this.diary.show()
 	}
 
-	static hideDiary(){
-		this.diaryDom.style.display = 'none'
+	hideDiary(){
+		this.diary.hide()
 	}
 
-	static setButtons(array){
+	setDiary(diary){
+		this.diary = diary
+	}
+
+	setButtons(array){
 		this.buttons = array
 		this.buttonLayerDom.innerHTML = ''
 		array.map(x => {
@@ -54,13 +61,13 @@ class Dialogue {
 			button.innerText = x.text
 			button.addEventListener('click', e => {
 				e.stopPropagation()
-				x.callback()
+				x.callback(e)
 			})
 			this.buttonLayerDom.appendChild(button)
 		})
 	}
 
-	static setCanContinue(bool){
+	setCanContinue(bool){
 		if(bool){
 			this.toContinue = true
 			this.dom.classList.add('to-continue')
@@ -70,7 +77,7 @@ class Dialogue {
 		}
 	}
 
-	static setAvatar(url){
+	setAvatar(url){
 		if(url){
 			this.avatarDom.style.display = 'block'
 			this.avatarDom.src = url
@@ -79,7 +86,7 @@ class Dialogue {
 		}
 	}
 
-	static setName(name){
+	setName(name){
 		if(name){
 			this.nameDom.innerText = name
 			this.contentDom.classList.remove('only-content')
@@ -89,7 +96,7 @@ class Dialogue {
 		}
 	}
 
-	static setContent(content){
+	setContent(content){
 		if(content){
 			this.contentDom.innerText = content
 		} else {
@@ -97,37 +104,5 @@ class Dialogue {
 		}
 	}
 }
-
-Dialogue.init()
-Dialogue.show()
-Dialogue.setContent("放在纤细的食指尖上的戏剧剧本\n墨水的味道\n随着埃文的风吹散开来。")
-Dialogue.setCanContinue(true)
-Dialogue.setButtons([{text: '继续', callback: function(){
-	Dialogue.setAvatar(avatar)
-	Dialogue.setName('马洛')
-	Dialogue.setContent("我是马洛，现在我给你讲讲我的故事吧。")
-	Dialogue.setCanContinue(false)
-	Dialogue.setButtons([{text: '交谈', callback: function(){
-		Dialogue.setContent("对于我知道哈利波菜的名字这件事情\n你一点都不用感到惊讶。\n除了你的名字\n我还知道很多关于你的事情")
-		Dialogue.setCanContinue(true)
-		Dialogue.setButtons([{text: '继续', callback: function(){
-			Dialogue.setContent("还有哈利波菜\n没有记住的\n那些事实。")
-			Dialogue.setButtons([{text: '继续', callback: function(){
-				Dialogue.showDiary()
-				Dialogue.setName('')
-				Dialogue.setContent("(马洛 看着我。)")
-				Dialogue.setCanContinue(false)
-				Dialogue.setButtons([{text: '结束对话', callback: function(){
-					Dialogue.setContent("马洛的故事结束了。")
-					Dialogue.hideDiary()
-					Dialogue.setAvatar('')
-					Dialogue.setButtons([{text: '关闭对话窗口', callback: function(){
-						Dialogue.hide()
-					}}])
-				}}])
-			}}])
-		}}])
-	}}, {text: '交易', callback: (e => e)}])
-}}])
 
 export default Dialogue

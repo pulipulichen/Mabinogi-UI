@@ -1,6 +1,8 @@
 import Dialogue from './dialogue'
+import Media from './media'
+import Diary from './diary'
 
-var MabinogiUI = { Dialogue }
+var MabinogiUI = { Dialogue, Media, Diary }
 
 window.MabinogiUI = MabinogiUI
 

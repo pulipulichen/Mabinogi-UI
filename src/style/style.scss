@@ -15,7 +15,7 @@ $prohibitCursor: url(../cursor/prohibit.cur) 0 0, default;
 	-ms-user-select: none;
 }
 
-div.dialogue {
+#dialogue {
 	position: absolute;
 	top: 70%;
 	left: 50%;
@@ -32,10 +32,9 @@ div.diary {
 	.keyword {
 		border: 1px solid black;
 		border-radius: 2px;
-		padding: 1px;
+		padding: 2px 2px 0;
 		color: blue;
-		font-size: 11.5px;
-		letter-spacing: 0.75px;
+		font-size: 12px;
 		&:hover {
 			box-shadow: 0 0 0px 1px #000;
 			cursor: $pointerCursor;
@@ -59,8 +58,6 @@ div.diary {
 		height: 220px;
 		color: black;
 		line-height: 16px;
-		font-size: 11.5px;
-		letter-spacing: 0.75px;
 	}
 
 	.left-side {
@@ -79,8 +76,6 @@ div.diary {
 		right: 192px;
 		bottom: 20px;
 		font-family: monospace;
-		font-size: 11.5px;
-		letter-spacing: 0.75px;
 	}
 }
 
