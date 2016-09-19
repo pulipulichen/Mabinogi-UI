@@ -98,7 +98,16 @@ class Dialogue {
 
 	setContent(content){
 		if(content){
-			this.contentDom.innerText = content
+			cancelAnimationFrame(this.requestedAnimationId)
+			this.contentDom.innerText = ''
+			var printText = function(){
+				if(content){
+					this.contentDom.innerText += content.slice(0, 2)
+					content = content.slice(2)
+					this.requestedAnimationId = requestAnimationFrame(printText)
+				}
+			}.bind(this)
+			this.requestedAnimationId = requestAnimationFrame(printText)
 		} else {
 			this.contentDom.innerText = ''
 		}
