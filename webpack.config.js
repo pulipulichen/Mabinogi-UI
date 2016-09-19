@@ -32,7 +32,7 @@ module.exports = {
 			stylesheetPath: './src/style',
 			spritePath: './src/gen',
 			filterBy: function(image){
-				if(image.url.match(/material/)){
+				if(image.url.match(/(material)|(cur)/)){
 					return Promise.reject()
 				}
 				return Promise.resolve()
