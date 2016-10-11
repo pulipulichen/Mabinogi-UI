@@ -1,0 +1,47 @@
+<portraitAnimation image="NPCportrait_Marlowe.dds">
+
+<clipInformations number='8'>
+    <clipInformation x1=" 162" y1="  12" x2=" 382" y2=" 200" originX=" 162" originY="  12" />
+    <clipInformation x1=" 141" y1=" 201" x2=" 454" y2=" 304" originX=" 141" originY=" 201" />
+    <clipInformation x1="   1" y1=" 218" x2=" 140" y2=" 511" originX="   1" originY=" 218" />
+    <clipInformation x1=" 141" y1=" 305" x2=" 464" y2=" 511" originX=" 141" originY=" 305" />
+    <clipInformation x1=" 454" y1="   0" x2=" 511" y2="  38" originX=" 216" originY="  97" />
+    <clipInformation x1=" 454" y1="  40" x2=" 511" y2="  78" originX=" 216" originY="  97" />
+    <clipInformation x1=" 454" y1="  80" x2=" 511" y2=" 118" originX=" 216" originY="  97" />
+    <clipInformation x1=" 454" y1=" 120" x2=" 511" y2=" 158" originX=" 216" originY="  97" />
+</clipInformations>
+<animations number='2'>
+    <animation index='0' name='base'>
+        <background>
+            <clips number='4'>
+                <clip value=" 3 " />
+                <clip value=" 2 " />
+                <clip value=" 1 " />
+                <clip value=" 0 " />
+            </clips>
+        </background>
+    </animation>
+    <animation index='1' name='normal'>
+        <background>
+            <clips number='1'>
+                <clip value=" 4 " />
+            </clips>
+        </background>
+        <frame index='0' duration='0.06'>
+            <clips number='1'>
+                <clip value=" 5 " />
+            </clips>
+        </frame>
+        <frame index='1' duration='0.15'>
+            <clips number='1'>
+                <clip value=" 6 " />
+            </clips>
+        </frame>
+        <frame index='2' duration='0.06'>
+            <clips number='1'>
+                <clip value=" 7 " />
+            </clips>
+        </frame>
+    </animation>
+</animations>
+</portraitAnimation>

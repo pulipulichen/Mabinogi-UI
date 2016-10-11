@@ -1,9 +1,11 @@
 require('./style/style.scss')
 require('file?name=[name].[ext]!./index.html')
 import MabinogiUI from './script/mabinogi-ui'
+import url from './image/material/npcportrait_marlowe.png'
 
-var {Dialogue, Media, Diary} = MabinogiUI
+var {Dialogue, Media, Diary, Avatar} = MabinogiUI
 var avatar = require('./image/material/marlowe-avatar.png')
+var avatarData = require('./data/npcportrait_ani_marlowe.xml')
 
 var diary = new Diary(document.querySelector('#diary'))
 diary.setLabelNames(['基础', '中级', '高级', '备忘录'])
@@ -26,7 +28,7 @@ diary.setContent([
 var dialogue = new Dialogue(document.querySelector('#dialogue'))
 dialogue.setDiary(diary)
 dialogue.show()
-dialogue.setContent("放在纤细的食指尖上的戏剧剧本\n墨水的味道\n随着埃文的风吹散开来。")
+dialogue.setContent("放在纤细的食指尖上的戏剧剧本\r\n墨水的味道\r\n随着埃文的风吹散开来。")
 dialogue.setCanContinue(true)
 dialogue.setButtons([{text: '继续', callback: function(){
 	dialogue.setAvatar(avatar)
@@ -56,3 +58,16 @@ dialogue.setButtons([{text: '继续', callback: function(){
 	}}, {text: '交易', callback: (e => e)}])
 }}])
 
+MabinogiUI.Loader.load({
+	image: {
+		marlowe: url
+	},
+	portraitData: {
+		marlowe: avatarData
+	}
+}).then(function(){
+	var avatar = new Avatar(document.querySelector('#avatar'))
+	avatar.setImage(MabinogiUI.Loader.images.marlowe)
+	avatar.setPortraitData(MabinogiUI.Loader.portraitDatas.marlowe)
+	window.avatar = avatar
+})

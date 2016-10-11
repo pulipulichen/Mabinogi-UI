@@ -19,7 +19,7 @@ module.exports = {
 				loader: ExtractTextPlugin.extract('css!postcss!sass')
 			},
 			{
-				test: /(\.png|\.cur|\.wav|\.jpg|\.ogg)$/,
+				test: /(\.png|\.cur|\.wav|\.jpg|\.ogg|\.xml)$/,
 				loader: 'file?name=[name].[ext]'
 			}
 		]

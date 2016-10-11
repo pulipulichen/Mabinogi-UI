@@ -98,11 +98,14 @@ class Dialogue {
 
 	setContent(content){
 		if(content){
+			//due to innerText's weird bahaviour for spaces
+			var text = ''
 			cancelAnimationFrame(this.requestedAnimationId)
 			this.contentDom.innerText = ''
 			var printText = function(){
 				if(content){
-					this.contentDom.innerText += content.slice(0, 2)
+					text += content.slice(0, 2)
+					this.contentDom.innerText = text
 					content = content.slice(2)
 					this.requestedAnimationId = requestAnimationFrame(printText)
 				}
