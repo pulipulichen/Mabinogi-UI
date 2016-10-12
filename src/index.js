@@ -3,7 +3,7 @@ require('file?name=[name].[ext]!./index.html')
 import MabinogiUI from './script/mabinogi-ui'
 import url from './image/material/npcportrait_marlowe.png'
 
-var {Dialogue, Media, Diary, Avatar} = MabinogiUI
+var {Dialogue, Media, Diary, Portrait} = MabinogiUI
 var avatar = require('./image/material/marlowe-avatar.png')
 var avatarData = require('./data/npcportrait_ani_marlowe.xml')
 
@@ -66,7 +66,7 @@ MabinogiUI.Loader.load({
 		marlowe: avatarData
 	}
 }).then(function(){
-	var avatar = new Avatar(document.querySelector('#avatar'))
+	var avatar = new Portrait(document.querySelector('#avatar'))
 	avatar.setImage(MabinogiUI.Loader.images.marlowe)
 	avatar.setPortraitData(MabinogiUI.Loader.portraitDatas.marlowe)
 	window.avatar = avatar

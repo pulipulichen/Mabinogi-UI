@@ -41,12 +41,11 @@ class Loader {
 			} else {
 				var req = new XMLHttpRequest()
 				req.open('get', url)
-				var that = this
 				req.onload = e => {
 					var parser = new DOMParser()
 					var xmldoc = parser.parseFromString(e.target.responseText, 'text/xml')
-					var data = that.decodePortraitData(xmldoc)
-					that.portraitDatas[name] = data
+					var data = this.decodePortraitData(xmldoc)
+					this.portraitDatas[name] = data
 					resolve()
 				}
 				req.send()

@@ -23,7 +23,7 @@ function doWithDelay(func, delay){
 	})
 }
 
-class Avatar {
+class Portrait {
 	constructor(dom){
 		this.dom = dom
 		var canvas = document.createElement('canvas')
@@ -53,19 +53,40 @@ class Avatar {
 
 	}
 
+	startNictation(){
+		setInterval(_ => {
+			this.drawAnimation('normal')
+			this.drawAnimation('base')
+		}, 5000)
+	}
+
 	drawFrame(frame){
 		return doWithDelay(e => frame.clips.map(c => this.drawClip(c)), frame.duration * 1000)
 	}
 
-	drawAnimation(name){
+	async drawAnimation(name){
 		var animation = this.animations.find(x => x.name == name)
 		animation.background.map(c => this.drawClip(c))
-		this.drawing = true
 		if(animation.frames.length > 0){
-			animation.frames.reduce((s,i) =>{
-				return s.then(this.drawFrame.bind(this, i))
-			}, new Promise(r => r()))
+			var generators = animation.frames.map(f => _ => {
+				f.clips.map(c => this.drawClip(c))
+				return this.delayPromise(f.duration)
+			})
+			this.runPromiseSequence(generators)
 		}
+	}
+
+	delayPromise(n){
+		var ms = n * 1000;
+		return new Promise(function(resolve, reject){
+			setInterval(function(){
+				resolve()
+			}, ms)
+		})
+	}
+
+	runPromiseSequence(generators){
+		generators.reduce((s, i) => s.then(_ => i()), new Promise(resolve => resolve()))
 	}
 
 	drawClip(index){
@@ -74,4 +95,4 @@ class Avatar {
 	}
 }
 
-export default Avatar
+export default Portrait

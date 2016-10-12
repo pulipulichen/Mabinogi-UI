@@ -1,10 +1,12 @@
+import 'babel-polyfill'
+
 import Dialogue from './dialogue'
 import Media from './media'
 import Diary from './diary'
-import Avatar from './avatar'
+import Portrait from './portrait'
 import Loader from './loader'
 
-var MabinogiUI = { Dialogue, Media, Diary, Avatar, Loader }
+var MabinogiUI = { Dialogue, Media, Diary, Portrait, Loader }
 
 window.MabinogiUI = MabinogiUI
 
