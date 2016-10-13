@@ -64,7 +64,7 @@ class Portrait {
 		return doWithDelay(e => frame.clips.map(c => this.drawClip(c)), frame.duration * 1000)
 	}
 
-	async drawAnimation(name){
+	drawAnimation(name){
 		var animation = this.animations.find(x => x.name == name)
 		animation.background.map(c => this.drawClip(c))
 		if(animation.frames.length > 0){

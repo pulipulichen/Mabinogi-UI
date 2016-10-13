@@ -1,5 +1,3 @@
-import 'babel-polyfill'
-
 import Dialogue from './dialogue'
 import Media from './media'
 import Diary from './diary'
