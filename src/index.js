@@ -69,5 +69,6 @@ MabinogiUI.Loader.load({
 	var avatar = new Portrait(document.querySelector('#avatar'))
 	avatar.setImage(MabinogiUI.Loader.images.marlowe)
 	avatar.setPortraitData(MabinogiUI.Loader.portraitDatas.marlowe)
-	window.avatar = avatar
+	avatar.startNictation()
+	avatar.drawAnimation('base')
 })

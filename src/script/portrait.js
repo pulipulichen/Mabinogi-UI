@@ -41,23 +41,21 @@ class Portrait {
 		this.portraitData = portraitData
 		this.clips = portraitData.clips
 		this.animations = portraitData.animations
-		this.drawAnimation('base')
-		this.drawAnimation('normal')
 	}
 
 	setNictationInterval(){
 
 	}
 
-	setMood(){
-
+	get nictationInterval(){
+		return Math.ceil(Math.random() * 500) + 4500
 	}
 
 	startNictation(){
 		setInterval(_ => {
 			this.drawAnimation('normal')
 			this.drawAnimation('base')
-		}, 5000)
+		}, this.nictationInterval)
 	}
 
 	drawFrame(frame){
