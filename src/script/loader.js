@@ -59,9 +59,13 @@ class Loader {
 			return {x1, y1, x2, y2, originX, originY}
 		})
 		var animations = Array.from(xmldoc.querySelectorAll('animation')).map(x => {
+			var background = []
+			if(x.querySelector('background')){
+				background = Array.from(x.querySelector('background').querySelectorAll('clip')).map(n => parseInt(n.getAttribute('value')))
+			}
 			return {
 				name: x.getAttribute('name'),
-				background: Array.from(x.querySelector('background').querySelectorAll('clip')).map(n => parseInt(n.getAttribute('value'))),
+				background,
 				frames: Array.from(x.querySelectorAll('frame')).map(f => {
 					return {
 						duration: parseFloat(f.getAttribute('duration')),

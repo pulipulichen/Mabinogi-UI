@@ -1,11 +1,15 @@
 require('./style/style.scss')
 require('file?name=[name].[ext]!./index.html')
+
 import MabinogiUI from './script/mabinogi-ui'
-import url from './image/material/npcportrait_marlowe.png'
+import marloweImage from './image/material/npcportrait_marlowe.png'
+import marloweData from './data/npcportrait_ani_marlowe.xml'
+import aeiraImage from './image/material/npcportrait_aeira.png'
+import aeiraData from './data/npcportrait_ani_aeira.xml'
+import devcatImage from './image/material/npcportrait_devcat.png'
+import devcatData from './data/npcportrait_ani_devcat.xml'
 
 var {Dialogue, Media, Diary, Portrait} = MabinogiUI
-var avatar = require('./image/material/marlowe-avatar.png')
-var avatarData = require('./data/npcportrait_ani_marlowe.xml')
 
 var diary = new Diary(document.querySelector('#diary'))
 diary.setLabelNames(['基础', '中级', '高级', '备忘录'])
@@ -31,7 +35,7 @@ dialogue.show()
 dialogue.setContent("放在纤细的食指尖上的戏剧剧本\r\n墨水的味道\r\n随着埃文的风吹散开来。")
 dialogue.setCanContinue(true)
 dialogue.setButtons([{text: '继续', callback: function(){
-	dialogue.setAvatar(avatar)
+	//dialogue.setAvatar(avatar)
 	dialogue.setName('马洛')
 	dialogue.setContent("我是马洛，现在我给你讲讲我的故事吧。")
 	dialogue.setCanContinue(false)
@@ -48,7 +52,7 @@ dialogue.setButtons([{text: '继续', callback: function(){
 				dialogue.setButtons([{text: '结束对话', callback: function(){
 					dialogue.setContent("马洛的故事结束了。")
 					dialogue.hideDiary()
-					dialogue.setAvatar('')
+					//dialogue.setAvatar('')
 					dialogue.setButtons([{text: '关闭对话窗口', callback: function(){
 						dialogue.hide()
 					}}])
@@ -60,15 +64,20 @@ dialogue.setButtons([{text: '继续', callback: function(){
 
 MabinogiUI.Loader.load({
 	image: {
-		marlowe: url
+		marlowe: marloweImage,
+		aeira: aeiraImage,
+		devcat: devcatImage
 	},
 	portraitData: {
-		marlowe: avatarData
+		marlowe: marloweData,
+		aeira: aeiraData,
+		devcat: devcatData
 	}
 }).then(function(){
 	var avatar = new Portrait(document.querySelector('#avatar'))
 	avatar.setImage(MabinogiUI.Loader.images.marlowe)
 	avatar.setPortraitData(MabinogiUI.Loader.portraitDatas.marlowe)
 	avatar.startNictation()
+	window.avatar = avatar
 	avatar.drawAnimation('base')
 })

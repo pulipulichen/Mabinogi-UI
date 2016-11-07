@@ -1,35 +1,11 @@
 
-function doWithDelay(func, delay){
-	return new Promise(function(resolve, reject){
-		var init
-
-		function first(timestamp){
-			func()
-			init = timestamp
-			console.log(timestamp)
-			requestAnimationFrame(second)
-		}
-
-		function second(timestamp){
-			console.log(timestamp)
-			if(timestamp - init > delay){
-				resolve()
-			} else {
-				requestAnimationFrame(second)
-			}
-		}
-
-		requestAnimationFrame(first)
-	})
-}
-
 class Portrait {
 	constructor(dom){
 		this.dom = dom
 		var canvas = document.createElement('canvas')
 		this.dom.appendChild(canvas)
-		canvas.width = 512
-		canvas.height = 512
+		canvas.width = 768
+		canvas.height = 768
 		this.context = canvas.getContext('2d')
 	}
 
@@ -43,10 +19,6 @@ class Portrait {
 		this.animations = portraitData.animations
 	}
 
-	setNictationInterval(){
-
-	}
-
 	get nictationInterval(){
 		return Math.ceil(Math.random() * 500) + 4500
 	}
@@ -56,10 +28,6 @@ class Portrait {
 			this.drawAnimation('normal')
 			this.drawAnimation('base')
 		}, this.nictationInterval)
-	}
-
-	drawFrame(frame){
-		return doWithDelay(e => frame.clips.map(c => this.drawClip(c)), frame.duration * 1000)
 	}
 
 	drawAnimation(name){
@@ -89,7 +57,15 @@ class Portrait {
 
 	drawClip(index){
 		var clip = this.clips[index]
-		this.context.drawImage(this.image, clip.x1, clip.y1, clip.x2-clip.x1+1, clip.y2-clip.y1+1, clip.originX, clip.originY, clip.x2-clip.x1+1, clip.y2-clip.y1+1)
+		this.context.drawImage(this.image, clip.x1, clip.y1, clip.x2-clip.x1+1, clip.y2-clip.y1+1, clip.originX+64, clip.originY+128, clip.x2-clip.x1+1, clip.y2-clip.y1+1)
+	}
+
+	show(){
+		this.dom.style.display = 'block'
+	}
+
+	hide(){
+		this.dom.style.display = 'none'
 	}
 }
 
